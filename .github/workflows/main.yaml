@@ -7,13 +7,6 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
   
 jobs:
-  ApprovalJob:
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
-    environment: Approval
-    steps:
-      - run: echo Hello from Approval environment
-  
   TestJob:
     runs-on: ubuntu-latest
     steps:
@@ -25,9 +18,22 @@ jobs:
       - name: Complete
         run: echo run Complete
 
-  ApprovalJob2:
+  ApprovalJob:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     environment: Approval
     steps:
       - run: echo Goodbye from Approval environment
+
+  TestJob:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ ApprovalJob ]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Sleep X Seconds
+        run: sleep 25
+      
+      - name: Complete
+        run: echo run Complete
