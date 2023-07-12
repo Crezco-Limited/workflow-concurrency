@@ -25,7 +25,7 @@ jobs:
     steps:
       - run: echo Goodbye from Approval environment
 
-  TestJob:
+  TestJob2:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ ApprovalJob ]
