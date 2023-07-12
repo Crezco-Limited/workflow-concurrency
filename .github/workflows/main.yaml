@@ -1,0 +1,18 @@
+on:
+  push:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
+jobs:
+  TestJob:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Sleep X Seconds
+        run: sleep 10
+      
+      - name: Complete
+        run: echo run Complete
