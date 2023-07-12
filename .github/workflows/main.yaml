@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Sleep X Seconds
-        run: sleep 24
+        run: sleep 25
       
       - name: Complete
         run: echo run Complete
